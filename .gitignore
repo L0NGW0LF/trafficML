@@ -1,0 +1,47 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environment
+trafficML/
+venv/
+env/
+.venv/
+.ENV/
+ENV/
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints
+
+# VS Code settings
+.vscode/
+
+# PyCharm settings
+.idea/
+
+# macOS system files
+.DS_Store
+
+# Log files
+*.log
+*.out
+
+# Compiled C files
+*.so
+
+# Test cache
+.pytest_cache/
+
+# Environment variables
+.env
+
+# Model and output directories (adjust as needed)
+out/
+data/interim/
+data/processed/
+data/raw/
+
+# Ignore large datasets or temporary exports
+*.csv
+!data/sample.csv  # Se vuoi mantenere un esempio
