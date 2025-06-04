@@ -38,10 +38,15 @@ ENV/
 
 # Model and output directories (adjust as needed)
 out/
-data/interim/
-data/processed/
-data/raw/
+!out/logs/.gitkeep  
+!out/models/.gitkeep
 
+data/interim/
+!data/interim/.gitkeep
+data/processed/
+!data/processed/.gitkeep
+data/raw/
+!data/raw/.gitkeep
 # Ignore large datasets or temporary exports
 *.csv
 !data/sample.csv  # Se vuoi mantenere un esempio
