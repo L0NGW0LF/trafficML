@@ -4,15 +4,15 @@ import joblib
 import os
 import sys
 
-# === Input da linea di comando ===
+# Input da linea di comando 
 if len(sys.argv) < 2:
-    print("❌ Specificare il file CSV da analizzare. Uso: python script.py <percorso/file.csv>")
+    print("Specificare il file CSV da analizzare. Uso: python script.py <percorso/file.csv>")
     sys.exit(1)
 
 file_path = sys.argv[1]
 file_base = os.path.splitext(os.path.basename(file_path))[0]
 
-# === Setup percorsi output ===
+
 output_dir = 'data/processed'
 log_dir = 'out/logs'
 os.makedirs(output_dir, exist_ok=True)
@@ -21,7 +21,6 @@ os.makedirs(log_dir, exist_ok=True)
 output_file = os.path.join(output_dir, f'{file_base}_transformed.csv')
 attack_log_path = os.path.join(log_dir, f'{file_base}_attacks.csv')
 
-# === Colonne ===
 new_column_names = [
     "Flow ID", "Source IP", "Source Port", "Destination IP", "Destination Port", "Protocol", "Timestamp",
     "Flow Duration", "Total Fwd Packets", "Total Backward Packets", "Total Length of Fwd Packets",
@@ -41,7 +40,7 @@ new_column_names = [
     "act_data_pkt_fwd", "min_seg_size_forward", "Active Mean", "Active Std", "Active Max", "Active Min",
     "Idle Mean", "Idle Std", "Idle Max", "Idle Min", "Label"
 ]
-# === Fase 1: carica e modifica ===
+# Fase 1: carica e modifica il dataset
 df = pd.read_csv(file_path)
 df.columns = df.columns.str.strip()
 
@@ -57,9 +56,9 @@ if len(new_column_names) != df.shape[1]:
 
 df.columns = new_column_names
 df.to_csv(output_file, index=False)
-print(f"✅ File trasformato e salvato: {output_file}")
+print(f" File trasformato e salvato: {output_file}")
 
-# === Fase 2: predizione ===
+# Fase 2: predizione
 model = joblib.load('out/model/rf_model_balanced.joblib')
 label_encoder = joblib.load('out/model/label_encoder.joblib')
 scaler = joblib.load('out/model/scaler.joblib')
@@ -87,12 +86,12 @@ results['Predicted Label'] = predicted_labels
 attacks = results[results['Predicted Label'] != 'BENIGN']
 
 if attacks.empty:
-    print("✅ Nessun attacco rilevato.")
+    print("Nessun attacco rilevato.")
 else:
     unique_attacks = attacks.drop_duplicates(subset=['Source IP', 'Destination IP', 'Destination Port', 'Predicted Label'])
     unique_attacks.to_csv(attack_log_path, index=False)
     
-    print(f"🚨 {len(unique_attacks)} attacchi unici rilevati. Salvati in: {attack_log_path}")
+    print(f"{len(unique_attacks)} attacchi unici rilevati. Salvati in: {attack_log_path}")
     for _, row in unique_attacks.iterrows():
-        print(f"🔐 {row['Source IP']} → {row['Destination IP']} :{row['Destination Port']} ({row['Predicted Label']})")
-    print("✅ Analisi completata.")
+        print(f" {row['Source IP']} → {row['Destination IP']} :{row['Destination Port']} ({row['Predicted Label']})")
+    print("Analisi completata.")
