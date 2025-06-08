@@ -45,5 +45,4 @@ ENV/
 !data/raw/.gitkeep
 # Ignore large datasets or temporary exports
 *.csv
-*.joblib
 !data/sample.csv  # Se vuoi mantenere un esempio
