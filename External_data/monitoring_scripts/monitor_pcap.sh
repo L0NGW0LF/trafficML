@@ -2,15 +2,15 @@
 set -euo pipefail
 
 # Configurazione
-PCAP_DIR="/home/mongelli/tpotce/data/suricata/log"
-OUTPUT_DIR="/home/mongelli/logs"
+PCAP_DIR="/home/user/tpotce/data/suricata/log"
+OUTPUT_DIR="/home/user/logs"
 PROCESSED_LOG="/var/log/monitor_pcap/processed_files.log"
 PYTHON_LOG="/var/log/monitor_pcap/python_output.log"
 LOCK_DIR="/var/lock/monitor_pcap"
-VENV="/home/mongelli/trafficML/venv"
-PYTHON_SCRIPT="/home/mongelli/trafficML/main.py"
+VENV="/home/user/trafficML/venv"
+PYTHON_SCRIPT="/home/user/trafficML/main.py"
 REMOTE_USER="root"
-REMOTE_HOST="10.11.97.158"
+REMOTE_HOST="0.0.0.0"
 REMOTE_DIR="/root/attack_logs"
 INOTIFY_EVENTS="-m -e create --format '%f'"
 
