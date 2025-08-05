@@ -657,7 +657,7 @@ services:
     pull_policy: ${TPOT_PULL_POLICY}
     volumes:
      - ${TPOT_DATA_PATH}/suricata/log:/var/log/suricata
-     - /home/mongelli/tpotce/suricata_custom.yaml:/etc/suricata/suricata.yaml
+     - /home/user/tpotce/suricata_custom.yaml:/etc/suricata/suricata.yaml
 
 ##################
 #### Tools
